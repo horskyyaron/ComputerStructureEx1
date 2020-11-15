@@ -16,7 +16,14 @@ int is_big_endian() {
 }
 
 unsigned long merge_bytes(unsigned long x, unsigned long int y) {
-  return 0;
+
+  //isolating the first half, starting with the LSB using masking and bitwise AND.
+  unsigned long int first_half_y = y & 0x00000000ffffffff;
+
+  //isolating the second half, starting with the MSB using masking and bitwise AND.
+  unsigned long int second_half_x = x & 0xffffffff00000000;
+
+  return first_half_y | second_half_x;
 }
 
 unsigned long put_byte(unsigned long x, unsigned char b, int i) {
